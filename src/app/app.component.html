@@ -1,0 +1,45 @@
+<div *ngIf="global_variables.IsLoggedIn(); else loginPage">
+
+
+
+
+  <div class="navbar-fixed">
+    <nav>
+      <div class="nav-wrapper">
+        <ul class="right hide-on-med-and-down">
+          <li>
+            <a href="#" data-target="slide-out" class="sidenav-trigger">
+              <i class="large material-icons">person</i>
+              {{global_variables.logInDetails.UserName}}
+            </a>
+          </li>
+        </ul>
+      </div>
+    </nav>
+  </div>
+        
+
+  <ul id="slide-out" class="sidenav">
+    <li><div class="user-view">
+      <div class="background">
+        <img src="../assets/images/bg/userBG.jpg">
+      </div>
+      <a href="#user"><img class="circle white" src="{{global_variables.fixedBaseAPI + global_variables.logInDetails.UserProfilePic}}"></a>
+      <a href="#name"><span class="white-text name">
+        {{global_variables.logInDetails.UserName}}</span></a>
+      <a href="#email"><span class="white-text email">
+        {{global_variables.logInDetails.UserEmail}}</span></a>
+    </div></li>
+    <li><a href="#" (click)="logOut();"><i class="material-icons">exit_to_app</i>Log Out</a></li>
+    <li><div class="divider"></div></li>
+    <li><a class="subheader">Actions</a></li>
+  </ul>
+
+  <router-outlet></router-outlet>
+
+  
+</div>
+
+<ng-template #loginPage>
+  <router-outlet></router-outlet>
+</ng-template>  

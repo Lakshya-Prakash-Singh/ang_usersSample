@@ -1,0 +1,121 @@
+<div id="bgFullScreen">
+    <div class="container">
+        <div class="row">
+            <div class="col s12 m10 l8 offset-m1 offset-l2">
+                <div class="card mrt-150 silver darken-1">
+                    <div class="card-content white-text center"  [class.d-none]="!toggleLoginForm">
+                        <h4 class="truncate bg-card-user">
+                            <label for="profilePic" class="uploadImageButton">
+                                <img src="{{ProfilePic}}" alt="User" class="circle loginImage responsive-img">
+                            </label>
+                            <div class="row login">
+                                <br />
+                                <form class="col s12" (ngSubmit)="signUp($event)" [formGroup]="signUpForm">
+                                    <input id="profilePic" (change)="signUpForm_ImageUpload($event)" class="d-none" type="file" accept="image/png, image/jpeg, image/jpg" />
+                                    <div class="row">
+                                        <div class="input-field col m6 s12">
+                                            <i class="material-icons iconis prefix">face</i>
+                                            <input id="firstName"  data-length="20" minlength="3" maxlength="20" formControlName="FirstName" type="text" required class="validate">
+                                            <label for="firstName">First Name</label>
+                                            <span  *ngIf="signUpForm.get('FirstName')?.hasError('required') && signUpForm.get('FirstName')?.touched" class="helper-text" data-error="This field is required." data-success=""></span>
+                                            <span  *ngIf="signUpForm.get('FirstName')?.hasError('minlength') && signUpForm.get('FirstName')?.touched" class="helper-text" data-error="The min. length for this field is 3 characters." data-success=""></span>
+                                            <span  *ngIf="signUpForm.get('FirstName')?.hasError('maxlength') && signUpForm.get('FirstName')?.touched" class="helper-text" data-error="The max. length for this field is 20 characters." data-success=""></span>
+                                        </div>
+                                        <div class="input-field col m6 s12">
+                                            <i class="material-icons iconis prefix">face</i>
+                                            <input id="lastName" formControlName="LastName" type="text" class="validate">
+                                            <label for="lastName">Last Name</label>
+                                            <span  *ngIf="signUpForm.get('LastName')?.hasError('maxlength') && signUpForm.get('LastName')?.touched" class="helper-text" data-error="The max. length for this field is 20 characters." data-success=""></span>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="input-field col m12 s12">
+                                            <i class="material-icons iconis prefix">email</i>
+                                            <input id="email" formControlName="Email" maxlength="49" type="email" required class="validate">
+                                            <label for="email">E-mail</label>                                            
+                                            <span  *ngIf="signUpForm.get('Email')?.hasError('required') && signUpForm.get('Email')?.touched" class="helper-text" data-error="This field is required." data-success=""></span>
+                                            <span  *ngIf="signUpForm.get('Email')?.hasError('email') && signUpForm.get('Email')?.touched" class="helper-text" data-error="Please enter a Valid Email" data-success=""></span>
+                                            <span  *ngIf="signUpForm.get('Email')?.hasError('maxlength') && signUpForm.get('Email')?.touched" class="helper-text" data-error="The max. length for this field is 50 characters." data-success=""></span>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="input-field col m12 s12">
+                                            <i class="material-icons iconis prefix">phone</i>
+                                            <input id="phone"  pattern="^[0-9]*$" formControlName="PhoneNumber" minlength="10" maxlength="10" type="text" required class="validate">
+                                            <label for="phone">Phone Number</label>
+                                            <span  *ngIf="signUpForm.get('PhoneNumber')?.hasError('required') && signUpForm.get('PhoneNumber')?.touched" class="helper-text" data-error="This field is required." data-success=""></span>
+                                            <span  *ngIf="!signUpForm.get('PhoneNumber')?.hasError('pattern') && signUpForm.get('PhoneNumber')?.hasError('minlength') && signUpForm.get('PhoneNumber')?.touched" class="helper-text" data-error="A valid mobile number should be of min. 10 characters." data-success=""></span>
+                                            <span  *ngIf="!signUpForm.get('PhoneNumber')?.hasError('pattern') && signUpForm.get('PhoneNumber')?.hasError('maxlength') && signUpForm.get('PhoneNumber')?.touched" class="helper-text" data-error="A valid mobile number should be of max. 10 characters." data-success=""></span>
+                                            <span  *ngIf="signUpForm.get('PhoneNumber')?.hasError('pattern') && signUpForm.get('PhoneNumber')?.touched" class="helper-text" data-error="Please enter a valid mobile number (numbers only)" data-success=""></span>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="input-field col m12 s12">
+                                            <i class="material-icons iconis prefix">lock</i>
+                                            <input id="password" pattern="^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,}$" minlength="8" maxlength="20" formControlName="Password" type="password" required class="validate">
+                                            <span  *ngIf="signUpForm.get('Password')?.hasError('required') && signUpForm.get('Password')?.touched" class="helper-text" data-error="This field is required." data-success=""></span>
+                                            <span  *ngIf="!signUpForm.get('Password')?.hasError('pattern') && signUpForm.get('Password')?.hasError('minlength') && signUpForm.get('Password')?.touched" class="helper-text" data-error="Min. password length is 8 characters." data-success=""></span>
+                                            <span  *ngIf="!signUpForm.get('Password')?.hasError('pattern') && signUpForm.get('Password')?.hasError('maxlength') && signUpForm.get('Password')?.touched" class="helper-text" data-error="Min. password length is 20 characters." data-success=""></span>
+                                            <span  *ngIf="signUpForm.get('Password')?.hasError('pattern') && signUpForm.get('PhoneNumber')?.touched" class="helper-text" data-error="Please enter valid password (At least one letter, one number and one special character)" data-success=""></span>
+                                            <label for="password">Password</label>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <h6 class="red-text small pointer" (click)="func_toggleLoginForm();">or Log In</h6>
+                                        <button class="btn waves-effect waves-light" type="submit" name="submit" value="submit">Sign Up</button>
+                                    </div>
+                                </form>
+                            </div>
+                        </h4>
+                    </div>
+                    <div class="card-content white-text center" [class.d-none]="toggleLoginForm">
+                        <h4 class="truncate bg-card-user">
+                            <img src="../assets/images/icons/defaultUser.svg" alt="User" class="circle loginImage responsive-img">
+                            <div class="row login">
+                                <br />
+                                <form class="col s12" (ngSubmit)="login($event)" [formGroup]="loginForm">
+                                    <div class="row">
+                                        <div class="input-field col m12 s12">
+                                            <i class="material-icons iconis prefix">email</i>
+                                            <input id="email_login" formControlName="Email" type="email" required class="validate">
+                                            <label for="email_login">E-mail</label>                                            
+                                            <span  *ngIf="loginForm.get('Email')?.hasError('required') && loginForm.get('Email')?.touched" class="helper-text" data-error="This field is required." data-success=""></span>
+                                            <span  *ngIf="loginForm.get('Email')?.hasError('email') && loginForm.get('Email')?.touched" class="helper-text" data-error="Please enter a Valid Email" data-success=""></span>
+                                        </div>
+                                    </div>
+                                    <span class="grey-text">or</span>
+                                    <div class="row">
+                                        <div class="input-field col m12 s12">
+                                            <i class="material-icons iconis prefix">phone</i>
+                                            <input id="phone_login"  pattern="^[0-9]*$" formControlName="Phone Number" minlength="10" maxlength="10" type="text" required class="validate">
+                                            <label for="phone_login">Phone Number</label>
+                                            <span  *ngIf="loginForm.get('Phone Number')?.hasError('required') && loginForm.get('Phone Number')?.touched" class="helper-text" data-error="This field is required." data-success=""></span>
+                                            <span  *ngIf="!loginForm.get('Phone Number')?.hasError('pattern') && loginForm.get('Phone Number')?.hasError('minlength') && loginForm.get('Phone Number')?.touched" class="helper-text" data-error="A valid mobile number should be of min. 10 characters." data-success=""></span>
+                                            <span  *ngIf="!loginForm.get('Phone Number')?.hasError('pattern') && loginForm.get('Phone Number')?.hasError('maxlength') && loginForm.get('Phone Number')?.touched" class="helper-text" data-error="A valid mobile number should be of max. 10 characters." data-success=""></span>
+                                            <span  *ngIf="loginForm.get('Phone Number')?.hasError('pattern') && loginForm.get('Phone Number')?.touched" class="helper-text" data-error="Please enter a valid mobile number (numbers only)" data-success=""></span>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="input-field col m12 s12">
+                                            <i class="material-icons iconis prefix">lock</i>
+                                            <input id="password_login" pattern="^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,}$" minlength="8" maxlength="20" formControlName="Password" type="password" required class="validate">
+                                            <span  *ngIf="loginForm.get('Password')?.hasError('required') && loginForm.get('Password')?.touched" class="helper-text" data-error="This field is required." data-success=""></span>
+                                            <span  *ngIf="!loginForm.get('Password')?.hasError('pattern') && loginForm.get('Password')?.hasError('minlength') && loginForm.get('Password')?.touched" class="helper-text" data-error="Min. password length is 8 characters." data-success=""></span>
+                                            <span  *ngIf="!loginForm.get('Password')?.hasError('pattern') && loginForm.get('Password')?.hasError('maxlength') && loginForm.get('Password')?.touched" class="helper-text" data-error="Min. password length is 20 characters." data-success=""></span>
+                                            <span  *ngIf="loginForm.get('Password')?.hasError('pattern') && loginForm.get('Phone Number')?.touched" class="helper-text" data-error="Please enter valid password (At least one letter, one number and one special character)" data-success=""></span>
+                                            <label for="password_login">Password</label>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <h6 class="red-text small pointer" (click)="func_toggleLoginForm();">or Sign Up</h6>
+                                        <button class="btn waves-effect waves-light" type="submit" name="action">Log In</button>
+                                    </div>
+                                </form>
+                            </div>
+                        </h4>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
